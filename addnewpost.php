@@ -6,8 +6,7 @@ if(isset($_POST['submit'])) {
 	$title = mysqli_real_escape_string($connection,$_POST['title']);
 	$body = mysqli_real_escape_string($connection,$_POST['body']);  
 	$image = $_FILES['image']["name"];
-	$image_loc = "img/post/".basename($image);
-	//die($image_loc);
+	$image_loc = "img/post/".basename($image); 
 	date_default_timezone_set("Africa/Abidjan");
 	$current_time = Time();
 	$datetime = strftime("%B-%d-%Y %H:%M:%S",$current_time);
