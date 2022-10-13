@@ -1,0 +1,57 @@
+body {
+	background-color: #2f4050;
+}
+
+.col-md-10 {
+	background-color: #fff;
+}
+
+.sidebar a {
+	color: #bbb;
+	font-size: 0.9rem;
+}
+
+.sidebar li:hover {
+	color: #fff;
+	border-radius: 0.25rem; 
+	background-color: green;
+}
+
+.sidebar a:hover {
+	color: #fff;  
+	font-weight: bold;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+	font-weight: bold;
+}
+
+
+
+footer {
+	color: #fff;
+	text-align: center;
+	height: 5rem;
+	background-color: #1b62a5; 
+}
+
+footer .footer-content {
+	padding: 1.5rem;
+	display: inline-block;
+	
+}
+
+/*width: 30rem;*/
+
+
+
+
+
+
+
+
+
+
+
+
+
