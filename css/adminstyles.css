@@ -30,6 +30,10 @@ body {
 	font-weight: bold;
 }
 
+.wide-cell {
+	width: 8rem;
+}
+
 footer {
 	color: #fff;
 	text-align: center;
