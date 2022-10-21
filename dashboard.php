@@ -15,11 +15,49 @@
 		<title>Admin Dashboard</title>
 	</head>
 	<body>
+		<div class="nav-element">
+			<div style="background-color: #27aae1; height: 10px;" role="navigation">		
+			</div>
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				  <div class="container-fluid">
+					 <a class="navbar-brand" href="mainpage.php"><span class="h4">MindBlog</span></a>
+					 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					 </button>
+					 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						  <li class="nav-item">
+							 <a class="nav-link" href="mainpage.php" target="_blank">Home</a>
+						  </li>
+						  <li class="nav-item">
+							 <a class="nav-link" href="allposts.php" target="_blank">Blog</a>
+						  </li>  
+						  <li class="nav-item">
+							 <a class="nav-link" href="#" target="_blank">About Us</a>
+						  </li>  
+						  <li class="nav-item">
+							 <a class="nav-link" href="#" target="_blank">Services</a>
+						  </li>  
+						  <li class="nav-item">
+							 <a class="nav-link" href="#" target="_blank">Contact Us</a>
+						  </li>  
+						  <li class="nav-item">
+							 <a class="nav-link" href="#" target="_blank">Features</a>
+						  </li>  
+						</ul>
+						<form action="allposts.php" target="_blank" class="d-flex">
+						  <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						  <button class="btn btn-outline-primary" type="submit">Search</button>
+						</form>
+					 </div>
+			  </div>			  	
+			</nav>	
+			<div class="blue-band" style="background-color: #27aae1; height: 10px;" role="navigation"/>
+		</div>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="sidebar col-md-2">
-					<h5 class="mt-2">Mind Blog</h5>
-					<ul class="nav nav-pills flex-column nav-list">
+				<div class="sidebar col-md-2"> 
+					<ul class="nav nav-pills flex-column nav-list mt-3">
 						<li class="nav-item"><a class="nav-link active" href="dashboard.php">
 						<span class="fas fa-home"></span>&nbsp;Dashboard</a></li>
 						<li class="nav-item"><a class="nav-link" href="addnewpost.php">
@@ -81,6 +119,7 @@
 			<div class="footer-content">
 				<p>MindBlog Ltd &copy; All Rights Reserved </p>
 			</div>
-		</footer>
+		</footer>	
+		<div style="background-color: #27aae1; height: 10px;" role="navigation"/>
 	</body>
 </html>
