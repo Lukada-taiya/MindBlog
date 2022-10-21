@@ -22,6 +22,10 @@ body {
 	font-weight: bold;
 }
 
+.sidebar h4 {
+	color: #eee;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
 	font-weight: bold;
 }
