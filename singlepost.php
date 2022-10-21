@@ -28,10 +28,10 @@
 					 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						  <li class="nav-item">
-							 <a class="nav-link active" aria-current="page" href="mainpage.php">Home</a>
+							 <a class="nav-link" href="mainpage.php">Home</a>
 						  </li>
 						  <li class="nav-item">
-							 <a class="nav-link" href="allposts.php">Blog</a>
+							 <a class="nav-link active" aria-current="page" href="allposts.php">Blog</a>
 						  </li>  
 						  <li class="nav-item">
 							 <a class="nav-link" href="#">About Us</a>
@@ -46,8 +46,8 @@
 							 <a class="nav-link" href="#">Features</a>
 						  </li>  
 						</ul>
-						<form class="d-flex">
-						  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						<form action="allposts.php" class="d-flex">
+						  <input name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 						  <button class="btn btn-outline-primary" type="submit">Search</button>
 						</form>
 					 </div>
@@ -55,41 +55,54 @@
 			</nav>	
 			<div class="blue-band" style="background-color: #27aae1; height: 10px;" role="navigation"/>
 		</div>
-		<div class="container">
-		
-			<div class="blog-header mt-5">
-				<h1 class="h1">All Posts</h1>
-				<p class="lead">All of MindBlog's posts are shown below</p> 
-			</div>
+		<div class="container">					
 			<div class="row mb-5">
-				<div class="col-md-8">
+			<div class="blog-header mt-5">
 					<?php	
 							global $connection; 
-							$query = "SELECT post.id,post.title,post.body,post.image,post.datetime,category.name, admin.name AS author 
-							FROM post
-							INNER JOIN category ON post.category_id = category.id
-							INNER JOIN admin ON post.admin_id = admin.id
-							ORDER BY post.datetime DESC";
+							/*if(isset($_GET['search'])) {
+								$search = $_GET['search']; 
+								$query = "SELECT post.id,post.title,post.body,post.image,post.datetime,category.name, admin.name AS 
+								author
+								FROM post
+								INNER JOIN category ON post.category_id = category.id
+								INNER JOIN admin ON post.admin_id = admin.id
+								WHERE post.datetime LIKE '%$search%' OR post.title LIKE '%$search%' OR post.body LIKE '%$search%'
+								OR category.name LIKE '%$search%' OR admin.name LIKE '%$search%'
+								ORDER BY post.datetime DESC";
+							}else {*/
+								$id = $_GET['id'];
+								$query = "SELECT post.id,post.title,post.body,post.image,post.datetime,category.name, admin.name AS 
+								author 
+								FROM post
+								INNER JOIN category ON post.category_id = category.id
+								INNER JOIN admin ON post.admin_id = admin.id
+								WHERE post.id = '$id'
+								ORDER BY post.datetime DESC";
+							//}
 							$execute = mysqli_query($connection,$query); 
-							while($data = mysqli_fetch_array($execute)) {
+							if($data = mysqli_fetch_array($execute)) {
+								$id = $data['id'];
 								$title = $data['title'];
 								$body = $data['body'];
 								$image = $data['image'];
 								$author = $data['name'];
 								$category = $data['author']; 
 							?> 
-					<div class="post card mt-5"> 
+					<h1 class="h1"><?php echo $title ?></h1>
+					<p class="lead">A MindBlog Post</p>  
+				</div>
+				<div class="col-md-8">									
+					<div class="post card mb-5"> 
 						<img class="card-img-top" src="img/post/<?php echo $image ?>"/> 
-						<div class="card-body">
-							<h3 class="card-title"><?php echo $title ?></h3>	
+						<div class="card-body"> 
 							<div class="card-subtitle">
 								<h6>Category: <?php echo $category ?></h6>
 								<h6>Published By: <?php echo $author ?></h6>		
 							</div>													
-							<p class="card-text"><?php echo $body ?></p>
+							<p class="card-text"><?php echo $body; ?></p>														
 						</div>
-					</div>
-						
+					</div>						
 				<?php } ?>
 				</div>
 				<div class="col-md-3 offset-1">

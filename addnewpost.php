@@ -109,7 +109,7 @@ if(isset($_POST['submit'])) {
 							</div>
 							<div class="form-group">
 								<label for="body">Post:</label>
-								<textarea name="body" id="body" class="form-control" placeholder="Write post..."></textarea>
+								<textarea rows="10" name="body" id="body" class="form-control" placeholder="Write post..."></textarea>
 							</div>
 							<div class="form-group mt-2">
 								<button class="btn btn-success btn-sm" type="submit" name="submit">Post</button>
