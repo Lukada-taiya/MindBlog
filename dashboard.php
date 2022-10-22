@@ -132,7 +132,7 @@
 								<td><?php echo "Comment" ?></td>
 								<td class="wide-cell">
 									<a href="editpost.php?id=<?php echo $id ?>" class='btn btn-warning btn-sm'>Edit</a>
-									<a href='deletepost.php' class='btn btn-danger btn-sm'>Delete</a>
+									<a href="deletepost.php?id=<?php echo $id ?>" class='btn btn-danger btn-sm'>Delete</a>
 								</td>
 								<td class="wide-cell">
 									<a href="singlepost.php?id=<?php echo $id ?>" target="_blank" class='btn btn-success btn-sm'>Live 
