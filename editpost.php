@@ -3,6 +3,7 @@
 <?php require_once('include/functions.php') ?>
 <?php
 if(isset($_POST['submit'])) {
+	$id = $_GET['id'];
 	$title = mysqli_real_escape_string($connection,$_POST['title']);
 	$body = mysqli_real_escape_string($connection,$_POST['body']);  
 	$image = $_FILES['image']["name"];
@@ -13,23 +14,29 @@ if(isset($_POST['submit'])) {
 	$admin = 1;
 	$category = $_POST['category']; 
 	
-	if(empty($title) || empty($image) || $category == 0 || empty($body)) {
+	if(empty($title) || $category == 0 || empty($body)) {
 		$_SESSION['error-message'] = "All fields are required";
-		redirect("addnewpost.php");
+		redirect("dashboard.php");
 	}elseif(strlen($title) > 99) {
 		$_SESSION['error-message'] = "Category name is too long";
-		redirect("addnewpost.php");
+		redirect("dashboard.php");
 	}else { 
 		global $connection;
-		$query = "INSERT INTO post(title,body, image,category_id,datetime,admin_id) VALUES('$title','$body', '$image', '$category','$datetime', '$admin')";
+		if(empty($image)) {		
+			$query = "UPDATE post SET datetime='$datetime', title='$title',body='$body', category_id='$category'
+			 WHERE id='$id'";
+		}else {
+			$query = "UPDATE post SET datetime='$datetime', title='$title',body='$body',image='$image', category_id='$category'
+			 WHERE id='$id'";
+		}
 		$execute = mysqli_query($connection,$query); 
 		move_uploaded_file($_FILES['image']['tmp_name'], $image_loc);
 		if($execute) {
-			$_SESSION['success-message'] = "Post has been successfully created";
-			redirect('addnewpost.php');
+			$_SESSION['success-message'] = "Post has been successfully updated";
+			redirect('dashboard.php');
 		}else {
 			$_SESSION['error-message'] = "Something went wrong";
-			redirect('addnewpost.php');
+			redirect('dashboard.php');
 		}
 	}
 		
@@ -58,7 +65,7 @@ if(isset($_POST['submit'])) {
 					<ul class="nav nav-pills flex-column nav-list">
 						<li class="nav-item"><a class="nav-link" href="dashboard.php">
 						<span class="fas fa-home"></span>&nbsp;Dashboard</a></li>
-						<li class="nav-item"><a class="nav-link active" href="addnewpost.php">
+						<li class="nav-item"><a class="nav-link" href="addnewpost.php">
 						<span class="fas fa-file-alt"></span>&nbsp;Add New Post</a></li>
 						<li class="nav-item"><a class="nav-link" href="categories.php">
 						<span class="fas fa-tags"></span>&nbsp;Categories</a></li> 
@@ -71,15 +78,14 @@ if(isset($_POST['submit'])) {
 					</ul> 
 				</div>
 				<div class="col-md-10">
-					<h5 class="mt-2">Add New Post</h5>	
+					<h5 class="mt-2">Edit Post</h5>	
 					<div>
 						<?php 
 							echo error_message(); 
 							echo success_message(); 					
 						?>
-					</div>				
-					<form class="mb-2" action="editpost.php" method="post" enctype="multipart/form-data" class="post-form"> 
-						<?php	
+					</div>	
+					<?php	
 							global $connection; 
 							$idToEdit = $_GET['id'];
 							$query = "SELECT post.id,post.title,post.body,post.image,post.datetime,category.name, category.id AS cId
@@ -89,11 +95,13 @@ if(isset($_POST['submit'])) {
 							if($data = mysqli_fetch_array($execute)) {
 								$title = $data['title'];
 								$cat_id = $data['cId'];
-								$category = $data['name'];  
+								$category = $data['name']; 
+								$image = $data['image']; 
 								$body = $data['body'];
 								//$id = $data['id']; 
 							}
-						?>  
+						?>  			
+					<form class="mb-2" action="editpost.php?id=<?php echo $idToEdit ?>" method="post" enctype="multipart/form-data" class="post-form"> 						
 						<fieldset>
 							<div class="form-group">
 								<label for="title">Title:</label>
@@ -102,6 +110,7 @@ if(isset($_POST['submit'])) {
 							</div>
 							<div class="form-group">
 								<label for="image">Image:</label>
+								<div class="mb-2">Current: <img src="img/post/<?php echo $image ?>" width="170px" height="80px"/></div>
 								<input type="file" name="image" id="image" class="form-control"/>
 							</div>
 							<div class="form-group">
@@ -116,18 +125,18 @@ if(isset($_POST['submit'])) {
 											$name = $data['name'];  
 											$id = $data['id']; 
 									?>  															
-									<?php
-											$html = "<option value='$id' ($id == $idToEdit) ? selected:''>$name</option>";
-											echo $html;
-									?>	  
+									<option value="<?php echo $id ?>" <?php echo ($id == $cat_id) ? 'selected':''?>><?php echo $name ?> 
+									</option> 
+									<?php } ?>
 								</select>
 							</div>
 							<div class="form-group">
 								<label for="body">Post:</label>
-								<textarea rows="10" name="body" id="body" class="form-control" placeholder="Write post..."></textarea>
+								<textarea rows="10" name="body" id="body" class="form-control"><?php echo $body ?>
+								</textarea>
 							</div>
 							<div class="form-group mt-2">
-								<button class="btn btn-success btn-sm" type="submit" name="submit">Post</button>
+								<button class="btn btn-success btn-sm" type="submit" name="submit">Edit Post</button>
 							</div>
 						</fieldset>
 					</form> 

@@ -74,7 +74,7 @@
 					</ul> 
 				</div>
 				<div class="col-md-10">
-					<div>
+					<div class="mt-1">
 						<?php 
 							echo error_message(); 
 							echo success_message(); 					
