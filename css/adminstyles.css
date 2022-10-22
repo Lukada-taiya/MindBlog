@@ -30,13 +30,16 @@ body {
 	font-weight: bold;
 }
 
-
+.wide-cell {
+	width: 8rem;
+}
 
 footer {
 	color: #fff;
 	text-align: center;
 	height: 5rem;
-	background-color: #1b62a5; 
+	color: #fff;
+	background-color: #212529; 
 }
 
 footer .footer-content {
@@ -44,7 +47,6 @@ footer .footer-content {
 	display: inline-block;
 	
 }
-
 /*width: 30rem;*/
 
 
