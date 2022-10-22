@@ -131,7 +131,7 @@
 								<td><img src="img/post/<?php echo $image ?>" width='170px' height='50px'/></td>
 								<td><?php echo "Comment" ?></td>
 								<td class="wide-cell">
-									<a href='editpost.php' class='btn btn-warning btn-sm'>Edit</a>
+									<a href="editpost.php?id=<?php echo $id ?>" class='btn btn-warning btn-sm'>Edit</a>
 									<a href='deletepost.php' class='btn btn-danger btn-sm'>Delete</a>
 								</td>
 								<td class="wide-cell">
